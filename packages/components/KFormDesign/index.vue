@@ -157,7 +157,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "表单设计器 --by kcz"
+      default: "表单设计器"
     },
     showHead: {
       type: Boolean,

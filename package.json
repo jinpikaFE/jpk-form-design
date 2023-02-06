@@ -23,7 +23,7 @@
   },
   "main": "lib/k-form-design-mini.umd.min.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lib": "vue-cli-service build --target lib --name k-form-design --dest lib packages/index.js && npm run lib:mini",
     "lib:mini": "vue-cli-service build --target lib --name k-form-design-mini --dest lib packages/mini.js --no-clean",

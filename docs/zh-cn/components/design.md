@@ -212,7 +212,7 @@ export default {
         <td>title</td>
         <td>表单设计器标题</td>
         <td>String</td>
-        <td>"表单设计器 --by kcz"</td>
+        <td>"表单设计器"</td>
         <td></td>
       </tr>
       <tr>
