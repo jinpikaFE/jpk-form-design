@@ -1,10 +1,6 @@
 <template>
   <div>
-    <k-form-design
-      hideResetHint
-      @handlePagePreview="handlePagePreview"
-      showToolbarsText
-    />
+    <k-form-design hideResetHint @handlePagePreview="handlePagePreview" />
   </div>
 </template>
 
@@ -14,12 +10,7 @@ export default {
   methods: {
     handlePagePreview() {
       this.$router.push({
-        //核心语句
-        path: "/demo", //跳转的路径
-        query: {
-          //路由传参时push和query搭配使用 ，作用时传递参数
-          id: this.id,
-        },
+        path: "/demo",
       });
     },
   },

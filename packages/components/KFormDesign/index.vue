@@ -229,8 +229,8 @@ export default {
           layout: "horizontal",
           labelCol: { xs: 4, sm: 4, md: 4, lg: 4, xl: 4, xxl: 4 },
           labelWidth: 100,
-          labelLayout: "flex",
-          wrapperCol: { xs: 18, sm: 18, md: 18, lg: 18, xl: 18, xxl: 18 },
+          labelLayout: "Grid",
+          wrapperCol: { xs: 24, sm: 24, md: 15, lg: 15, xl: 15, xxl: 15 },
           hideRequiredMark: false,
           customStyle: "",
         },
@@ -380,14 +380,23 @@ export default {
       });
     },
     handleResetCache() {
-      this.resetData();
-      // revoke.redo();
-      setTimeout(() => {
-        revoke.recordList = [];
-        revoke.redoList = [];
-        this.$refs?.operatingArea?.redo();
-        window.localStorage.clear();
-      }, []);
+      Modal.confirm({
+        title: "警告",
+        content: "是否确认清空内容及缓存?",
+        okText: "是",
+        okType: "danger",
+        cancelText: "否",
+        onOk: () => {
+          this.resetData();
+          // revoke.redo();
+          setTimeout(() => {
+            revoke.recordList = [];
+            revoke.redoList = [];
+            this.$refs?.operatingArea?.redo();
+            window.localStorage.clear();
+          }, []);
+        },
+      });
     },
     resetData() {
       this.data = {
@@ -396,8 +405,8 @@ export default {
           layout: "horizontal",
           labelCol: { xs: 4, sm: 4, md: 4, lg: 4, xl: 4, xxl: 4 },
           labelWidth: 100,
-          labelLayout: "flex",
-          wrapperCol: { xs: 18, sm: 18, md: 18, lg: 18, xl: 18, xxl: 18 },
+          labelLayout: "Grid",
+          wrapperCol: { xs: 24, sm: 24, md: 15, lg: 15, xl: 15, xxl: 15 },
           hideRequiredMark: false,
           customStyle: "",
         },

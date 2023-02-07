@@ -488,7 +488,7 @@ export const defaultSchemaList = [
       disabled: false,
       multiple: true, // 是否允许多选
       hidden: false, // 是否隐藏，false显示，true隐藏
-      showLabel: false,
+      showLabel: true,
       width: "100%"
     },
     model: "",

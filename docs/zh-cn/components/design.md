@@ -229,13 +229,15 @@ export default {
         <td>[
         'save',
         'preview',
+        'pagePreview',
         'importJson',
         'exportJson',
         'exportCode',
         'reset',
+        'resetCache',
         'close',
-        "undo",
-        "redo"
+        'undo',
+        'redo',
       ]</td>
         <td>3.7.8</td>
       </tr>
@@ -328,7 +330,7 @@ export default {
         <td>Array</td>
         <td>3.7.5</td>
       </tr>
-            <tr>
+      <tr>
         <td>handleSave</td>
         <td>保存，触发save事件</td>
         <td>-</td>
@@ -355,6 +357,13 @@ export default {
         <td>-</td>
         <td>Object</td>
         <td>3.7.3</td>
+      </tr>
+      </tr>
+        <tr>
+        <td>handlePagePreview</td>
+        <td>自行处理页面预览方式，可通过路由跳转，配合k-form-build 使用</td>
+        <td>-</td>
+        <td>Void</td>
       </tr>
     </tbody>
   </table>
