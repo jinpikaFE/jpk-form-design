@@ -86,6 +86,7 @@ export default {
     handleImportJson() {
       // 导入JSON
       try {
+        /** 不能使用可以选链，保证editorJsonData.list editorJsonData.config 等值的存在，否则报错走 catch */
         const editorJsonData = JSON.parse(this.jsonFormat);
         this.jsonData.list = editorJsonData.list;
         this.jsonData.config = editorJsonData.config;
