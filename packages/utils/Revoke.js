@@ -3,10 +3,14 @@
  */
 export class Revoke {
   // 历史记录
-  recordList = [];
+  recordList = window?.localStorage?.getItem("recordList")
+    ? JSON.parse(window?.localStorage?.getItem("recordList"))
+    : [];
 
   // 撤销记录，用于重做
-  redoList = [];
+  redoList = window?.localStorage?.getItem("redoList")
+    ? JSON.parse(window?.localStorage?.getItem("redoList"))
+    : [];
 
   // 当前记录用currentRecord变量暂时存储，当用户修改时，再存放到recordList
   currentRecord = null;
@@ -16,7 +20,7 @@ export class Revoke {
 
   /**
    * @description: 插入历史记录
-   * @param {object}record
+   * @param {object}record {list: array, config: object}
    * @return {boolean}
    */
   push(record) {
@@ -43,7 +47,9 @@ export class Revoke {
     if (this.recordList.length > 20) {
       this.recordList.unshift();
     }
-
+    window.localStorage.setItem("currentRecord", JSON.stringify(record));
+    window.localStorage.setItem("recordList", JSON.stringify(this.recordList));
+    window.localStorage.setItem("redoList", JSON.stringify(this.redoList));
     return true;
   }
 
@@ -65,7 +71,9 @@ export class Revoke {
     }
     // 丢弃当前记录，防止重复添加
     this.currentRecord = null;
-
+    window.localStorage.setItem("currentRecord", record);
+    window.localStorage.setItem("recordList", JSON.stringify(this.recordList));
+    window.localStorage.setItem("redoList", JSON.stringify(this.redoList));
     return JSON.parse(record);
   }
 
@@ -88,6 +96,9 @@ export class Revoke {
     // 丢弃当前记录，防止重复添加
     this.currentRecord = null;
 
+    window.localStorage.setItem("currentRecord", record);
+    window.localStorage.setItem("recordList", JSON.stringify(this.recordList));
+    window.localStorage.setItem("redoList", JSON.stringify(this.redoList));
     return JSON.parse(record);
   }
 }

@@ -24,6 +24,16 @@
         </a>
       </a-tooltip>
 
+      <a-tooltip title="页面预览">
+        <a
+          v-if="toolbars.includes('pagePreview')"
+          @click="$emit('handlePagePreview')"
+        >
+          <a-icon type="layout" />
+          <span v-if="showToolbarsText">页面预览</span>
+        </a>
+      </a-tooltip>
+
       <a-tooltip title="导入">
         <a
           v-if="toolbars.includes('importJson')"
@@ -58,6 +68,15 @@
         <a v-if="toolbars.includes('reset')" @click="$emit('handleReset')">
           <a-icon type="delete" />
           <span v-if="showToolbarsText">清空</span>
+        </a>
+      </a-tooltip>
+      <a-tooltip title="清空全部缓存">
+        <a
+          v-if="toolbars.includes('resetCache')"
+          @click="$emit('handleResetCache')"
+        >
+          <a-icon type="minus-circle" />
+          <span v-if="showToolbarsText">清空全部缓存</span>
         </a>
       </a-tooltip>
       <Divider type="vertical" />
@@ -112,7 +131,7 @@ import { Divider } from "ant-design-vue";
 
 export default {
   components: {
-    Divider
+    Divider,
   },
   props: {
     toolbars: {
@@ -120,28 +139,37 @@ export default {
       default: () => [
         "save",
         "preview",
+        "pagePreview",
         "importJson",
         "exportJson",
         "exportCode",
         "reset",
-        "close"
-      ]
+        "resetCache",
+        "close",
+      ],
     },
 
     showToolbarsText: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       recordList: [],
-      redoList: []
+      redoList: [],
     };
   },
   created() {
     this.recordList = revoke.recordList;
     this.redoList = revoke.redoList;
-  }
+  },
+  methods: {
+    /** 清空 */
+    redo() {
+      this.recordList = [];
+      this.redoList = [];
+    },
+  },
 };
 </script>

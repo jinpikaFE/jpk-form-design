@@ -5,10 +5,13 @@ module.exports = {
     [
       "@babel/preset-env",
       {
-        useBuiltIns: "entry"
-      }
-    ]
+        useBuiltIns: "entry",
+      },
+    ],
   ],
   // 按需加载
-  plugins: ["@babel/plugin-proposal-class-properties"]
+  plugins: [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-optional-chaining"
+  ],
 };

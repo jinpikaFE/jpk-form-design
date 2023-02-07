@@ -1,4 +1,13 @@
 # 待改造
-- 转web component
-- 使用vue3重构，使用vue3的defineCustomElement
-- 使用vite
+- 方案一 测试不太行
+    - 转web component
+    - 使用vue3重构，使用vue3的defineCustomElement
+    - 使用vite
+- 方案二
+    - 起vue服务
+    - 接口请求及相关操作在改服务中执行
+    - url传递api地址
+    - url传递额外参数
+    - 执行相关操作，进行iframe 通信 提交进行通信
+    - 设计器操作design
+    - 构建器操作 builder

@@ -9,13 +9,16 @@
         :toolbars="toolbars"
         @handleSave="handleSave"
         @handlePreview="handlePreview"
+        @handlePagePreview="handlePagePreview"
         @handleOpenImportJsonModal="handleOpenImportJsonModal"
         @handleOpenCodeModal="handleOpenCodeModal"
         @handleOpenJsonModal="handleOpenJsonModal"
         @handleReset="handleReset"
+        @handleResetCache="handleResetCache"
         @handleClose="handleClose"
         @handleUndo="handleUndo"
         @handleRedo="handleRedo"
+        ref="operatingArea"
       >
         <template slot="left-action">
           <slot name="left-action"></slot>
@@ -31,7 +34,7 @@
         :class="{
           'show-head': showHead,
           'toolbars-top': toolbarsTop,
-          'show-head-and-toolbars-top': toolbarsTop && showHead
+          'show-head-and-toolbars-top': toolbarsTop && showHead,
         }"
       >
         <!-- 左侧控件区域 start -->
@@ -67,13 +70,16 @@
             :toolbars="toolbars"
             @handleSave="handleSave"
             @handlePreview="handlePreview"
+            @handlePagePreview="handlePagePreview"
             @handleOpenImportJsonModal="handleOpenImportJsonModal"
             @handleOpenCodeModal="handleOpenCodeModal"
             @handleOpenJsonModal="handleOpenJsonModal"
             @handleReset="handleReset"
+            @handleResetCache="handleResetCache"
             @handleClose="handleClose"
             @handleUndo="handleUndo"
             @handleRedo="handleRedo"
+            ref="operatingArea"
           >
             <template slot="left-action">
               <slot name="left-action"></slot>
@@ -157,43 +163,45 @@ export default {
   props: {
     title: {
       type: String,
-      default: "表单设计器"
+      default: "表单设计器",
     },
     showHead: {
       type: Boolean,
-      default: true
+      default: true,
     },
     hideResetHint: {
       type: Boolean,
-      default: false
+      default: false,
     },
     toolbarsTop: {
       type: Boolean,
-      default: false
+      default: false,
     },
     toolbars: {
       type: Array,
       default: () => [
         "save",
         "preview",
+        "pagePreview",
         "importJson",
         "exportJson",
         "exportCode",
         "reset",
+        "resetCache",
         "close",
         "undo",
-        "redo"
-      ]
+        "redo",
+      ],
     },
     showToolbarsText: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideModel: {
       // 隐藏数据字段
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -212,7 +220,7 @@ export default {
         "table",
         "alert",
         "text",
-        "html"
+        "html",
       ],
       schemaGroup: [],
       data: {
@@ -224,15 +232,15 @@ export default {
           labelLayout: "flex",
           wrapperCol: { xs: 18, sm: 18, md: 18, lg: 18, xl: 18, xxl: 18 },
           hideRequiredMark: false,
-          customStyle: ""
-        }
+          customStyle: "",
+        },
       },
       previewOptions: {
-        width: 850
+        width: 850,
       },
       selectItem: {
-        key: ""
-      }
+        key: "",
+      },
     };
   },
   components: {
@@ -246,7 +254,7 @@ export default {
     previewModal,
     kFormComponentPanel,
     formItemProperties,
-    formProperties
+    formProperties,
   },
   watch: {
     data: {
@@ -256,8 +264,8 @@ export default {
         });
       },
       deep: true,
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   computed: {
     collapseDefaultActiveKey() {
@@ -270,6 +278,17 @@ export default {
       } else {
         return ["1"];
       }
+    },
+  },
+  mounted() {
+    /** 获取本地缓存 */
+    if (window.localStorage.getItem("currentRecord")) {
+      this.data.list = JSON.parse(
+        window.localStorage.getItem("currentRecord")
+      )?.list;
+      this.data.config = JSON.parse(
+        window.localStorage.getItem("currentRecord")
+      )?.config;
     }
   },
   methods: {
@@ -279,7 +298,7 @@ export default {
       this.$set(list, index, {
         ...list[index],
         key,
-        model: key
+        model: key,
       });
       if (this.noModel.includes(list[index].type)) {
         // 删除不需要的model属性
@@ -295,7 +314,7 @@ export default {
         item = {
           ...item,
           key,
-          model: key
+          model: key,
         };
         if (this.noModel.includes(item.type)) {
           // 删除不需要的model属性
@@ -334,6 +353,13 @@ export default {
       this.$refs.previewModal.previewWidth = this.previewOptions.width;
       this.$refs.previewModal.visible = true;
     },
+    /**
+     * 跳转预览页面
+     * 自行处理
+     */
+    handlePagePreview() {
+      this.$emit("handlePagePreview");
+    },
     handleReset() {
       // 清空
       if (this.hideResetHint) {
@@ -350,8 +376,18 @@ export default {
         cancelText: "否",
         onOk: () => {
           this.resetData();
-        }
+        },
       });
+    },
+    handleResetCache() {
+      this.resetData();
+      // revoke.redo();
+      setTimeout(() => {
+        revoke.recordList = [];
+        revoke.redoList = [];
+        this.$refs?.operatingArea?.redo();
+        window.localStorage.clear();
+      }, []);
     },
     resetData() {
       this.data = {
@@ -363,8 +399,8 @@ export default {
           labelLayout: "flex",
           wrapperCol: { xs: 18, sm: 18, md: 18, lg: 18, xl: 18, xxl: 18 },
           hideRequiredMark: false,
-          customStyle: ""
-        }
+          customStyle: "",
+        },
       };
       this.handleSetSelectItem({ key: "" });
       message.success("已清空");
@@ -406,11 +442,11 @@ export default {
      */
     getFieldSchema() {
       const fields = [];
-      const traverse = array => {
-        array.forEach(element => {
+      const traverse = (array) => {
+        array.forEach((element) => {
           if (element.type === "grid" || element.type === "tabs") {
             // 栅格布局
-            element.columns.forEach(item => {
+            element.columns.forEach((item) => {
               traverse(item.list);
             });
           } else if (element.type === "card") {
@@ -421,8 +457,8 @@ export default {
             traverse(element.list);
           } else if (element.type === "table") {
             // 表格布局
-            element.trs.forEach(item => {
-              item.tds.forEach(val => {
+            element.trs.forEach((item) => {
+              item.tds.forEach((val) => {
                 traverse(val.list);
               });
             });
@@ -498,11 +534,11 @@ export default {
     },
     handleClose() {
       this.$emit("close");
-    }
+    },
   },
   created() {
     this.loadState = true;
     nodeSchema.addComputed(this.schemaGroup);
-  }
+  },
 };
 </script>
