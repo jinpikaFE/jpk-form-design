@@ -99,7 +99,20 @@
             placeholder="动态数据变量名"
           />
 
-          <KChangeOption v-show="!options.dynamic" v-model="options.options" />
+          <KChangeOption
+            v-show="!options.dynamic"
+            v-model="options.options"
+            v-if="!['treeSelect', 'cascader'].includes(selectItem.type)"
+          />
+          <Button
+            type="primary"
+            @click="handleJsonData"
+            v-if="
+              !options.dynamic &&
+                ['treeSelect', 'cascader'].includes(selectItem.type)
+            "
+            >编辑数据</Button
+          >
         </a-form-item>
         <!-- 选项配置及动态数据配置 end -->
         <!-- tabs配置 start -->
@@ -185,7 +198,7 @@
               'select',
               'switch',
               'slider',
-              'html'
+              'html',
             ].includes(selectItem.type) && isDefined(options.defaultValue)
           "
           label="默认值"
@@ -499,6 +512,7 @@
         </a-form-item>
       </a-form>
     </div>
+    <SetDataModal ref="setDataModal" @onOk="handelJsonOk" />
   </div>
 </template>
 
@@ -511,6 +525,8 @@
 import KChangeOption from "../../KChangeOption/index.vue";
 import kCheckbox from "../../KCheckbox/index.vue";
 import { pluginManager } from "../../../utils/index";
+import SetDataModal from "./setDataModal.vue";
+import { message } from "ant-design-vue";
 const Input = pluginManager.getComponent("input").component;
 const InputNumber = pluginManager.getComponent("number").component;
 const Rate = pluginManager.getComponent("rate").component;
@@ -522,6 +538,7 @@ const Textarea = pluginManager.getComponent("textarea").component;
 const Select = pluginManager.getComponent("select").component;
 const ColorPicker = pluginManager.getComponent("colorPicker").component;
 const ASwitch = pluginManager.getComponent("switch").component;
+const Button = pluginManager.getComponent("aButton").component;
 
 export default {
   name: "formItemProperties",
@@ -538,7 +555,9 @@ export default {
     RadioItem,
     RadioButton,
     Textarea,
-    Select
+    Select,
+    SetDataModal,
+    Button,
   },
   data() {
     return {
@@ -546,92 +565,92 @@ export default {
         // 字体选择设置
         {
           value: "",
-          label: "默认"
+          label: "默认",
         },
         {
           value: "SimSun",
-          label: "宋体"
+          label: "宋体",
         },
         {
           value: "FangSong",
-          label: "仿宋"
+          label: "仿宋",
         },
         {
           value: "SimHei",
-          label: "黑体"
+          label: "黑体",
         },
         {
           value: "PingFangSC-Regular",
-          label: "苹方"
+          label: "苹方",
         },
         {
           value: "KaiTi",
-          label: "楷体"
+          label: "楷体",
         },
         {
           value: "LiSu",
-          label: "隶书"
-        }
+          label: "隶书",
+        },
       ],
       sizeOptions: [
         //字号选择设置
         {
           value: "26pt",
-          label: "一号"
+          label: "一号",
         },
         {
           value: "24pt",
-          label: "小一"
+          label: "小一",
         },
         {
           value: "22pt",
-          label: "二号"
+          label: "二号",
         },
         {
           value: "18pt",
-          label: "小二"
+          label: "小二",
         },
         {
           value: "16pt",
-          label: "三号"
+          label: "三号",
         },
         {
           value: "15pt",
-          label: "小三"
+          label: "小三",
         },
         {
           value: "14pt",
-          label: "四号"
+          label: "四号",
         },
         {
           value: "12pt",
-          label: "小四"
+          label: "小四",
         },
         {
           value: "10.5pt",
-          label: "五号"
+          label: "五号",
         },
         {
           value: "9pt",
-          label: "小五"
-        }
-      ]
+          label: "小五",
+        },
+      ],
     };
   },
   computed: {
     options() {
       return this.selectItem.options || {};
-    }
+    },
   },
   props: {
     selectItem: {
       type: Object,
-      required: true
+      required: true,
     },
     hideModel: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     /**
@@ -640,7 +659,19 @@ export default {
      */
     isDefined(value) {
       return typeof value !== "undefined";
-    }
-  }
+    },
+    handleJsonData() {
+      console.log(this.selectItem.options.options);
+      this.$refs.setDataModal.jsonFormat = JSON.stringify(
+        this.selectItem.options.options
+      );
+      this.$refs.setDataModal.visible = true;
+    },
+    handelJsonOk(val) {
+      this.selectItem.options.options = JSON.parse(val);
+      this.$refs.setDataModal.visible = false;
+      message.success("修改成功");
+    },
+  },
 };
 </script>
