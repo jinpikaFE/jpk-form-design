@@ -663,7 +663,9 @@ export default {
     handleJsonData() {
       console.log(this.selectItem.options.options);
       this.$refs.setDataModal.jsonFormat = JSON.stringify(
-        this.selectItem.options.options
+        this.selectItem.options.options,
+        null,
+        4
       );
       this.$refs.setDataModal.visible = true;
     },
