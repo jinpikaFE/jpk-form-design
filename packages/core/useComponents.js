@@ -20,7 +20,7 @@ import {
   Icon,
   Tooltip,
   FormModel,
-  Collapse
+  Collapse,
 } from "ant-design-vue";
 
 pluginManager.addComponent("input", () => import("ant-design-vue/lib/input"));
@@ -28,7 +28,7 @@ pluginManager.addComponent("input", () => import("ant-design-vue/lib/input"));
 pluginManager.addComponent("textarea", () =>
   import("ant-design-vue/lib/input/TextArea")
 );
-pluginManager.addComponent("number", () =>
+pluginManager.addComponent("aNumber", () =>
   import("ant-design-vue/lib/input-number")
 );
 pluginManager.addComponent("select", () => import("ant-design-vue/lib/select"));
@@ -73,6 +73,9 @@ pluginManager.addComponent("aButton", () =>
 
 pluginManager.addComponent("button", () =>
   import("../components/KButton/index")
+);
+pluginManager.addComponent("number", () =>
+  import("../components/KNumber/index")
 );
 pluginManager.addComponent("divider", () =>
   import("../components/KDivider/index")

@@ -7,11 +7,12 @@ class NodeSchema {
   schemaList = [];
   schemaGroup = [
     {
-      title: "基础组件",
+      title: "输入型组件",
+      list: ["input", "textarea", "number", "editor"],
+    },
+    {
+      title: "选择型组件",
       list: [
-        "input",
-        "textarea",
-        "number",
         "select",
         "checkbox",
         "radio",
@@ -25,18 +26,17 @@ class NodeSchema {
         "treeSelect",
         "batch",
         "selectInputList",
-        "editor",
         "switch",
-        "button",
-        "alert",
-        "text",
-        "html"
-      ]
+      ],
+    },
+    {
+      title: "文本型型组件",
+      list: ["alert", "text", "html"],
     },
     {
       title: "布局组件",
-      list: ["divider", "card", "tabs", "grid", "table"]
-    }
+      list: ["divider", "card", "tabs", "grid", "table", "button"],
+    },
   ];
   designSchemaGroup = [];
 
@@ -46,7 +46,7 @@ class NodeSchema {
    * @returns
    */
   addSchemas(schemas) {
-    const s = schemas.map(item => {
+    const s = schemas.map((item) => {
       // 存在component组件则添加到插件管理器中
       item.component && pluginManager.addComponent(item.type, item.component);
       // 删除schemas中的component属性
@@ -113,13 +113,13 @@ class NodeSchema {
    * @returns schemaGroupList
    */
   getSchemaByGroup() {
-    const schemaGroupList = this.schemaGroup.map(item => {
-      const list = this.schemaList.filter(v => {
+    const schemaGroupList = this.schemaGroup.map((item) => {
+      const list = this.schemaList.filter((v) => {
         return item.list.includes(v.type);
       });
       return {
         ...item,
-        list
+        list,
       };
     });
     return schemaGroupList;

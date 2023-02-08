@@ -15,7 +15,7 @@
 <script>
 import { pluginManager } from "../../utils/index";
 const Slider = pluginManager.getComponent("aSlider").component;
-const InputNumber = pluginManager.getComponent("number").component;
+const InputNumber = pluginManager.getComponent("aNumber").component;
 export default {
   name: "KSlider",
   props: ["record", "value"],

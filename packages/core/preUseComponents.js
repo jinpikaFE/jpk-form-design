@@ -7,6 +7,7 @@
 import { pluginManager } from "../utils/index";
 import "./preUseAntd";
 import KButton from "../components/KButton/index";
+import KNumber from "../components/KNumber/index";
 import KDivider from "../components/KDivider/index";
 import KHtml from "../components/KHtml/index";
 import KSlider from "../components/KSlider/index";
@@ -23,6 +24,7 @@ import { codemirror } from "vue-codemirror-lite";
 import colorPicker from "vcolorpicker";
 
 pluginManager.addComponent("button", KButton);
+pluginManager.addComponent("number", KNumber);
 pluginManager.addComponent("divider", KDivider);
 pluginManager.addComponent("html", KHtml);
 pluginManager.addComponent("slider", KSlider);

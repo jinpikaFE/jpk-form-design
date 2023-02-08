@@ -528,7 +528,7 @@ import { pluginManager } from "../../../utils/index";
 import SetDataModal from "./setDataModal.vue";
 import { message } from "ant-design-vue";
 const Input = pluginManager.getComponent("input").component;
-const InputNumber = pluginManager.getComponent("number").component;
+const InputNumber = pluginManager.getComponent("aNumber").component;
 const Rate = pluginManager.getComponent("rate").component;
 const Checkbox = pluginManager.getComponent("checkbox").component;
 const Radio = pluginManager.getComponent("radio").component;

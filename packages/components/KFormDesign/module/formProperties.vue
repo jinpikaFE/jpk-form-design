@@ -108,7 +108,7 @@
  */
 import kCheckbox from "../../KCheckbox/index.vue";
 import { pluginManager } from "../../../utils/index";
-const InputNumber = pluginManager.getComponent("number").component;
+const InputNumber = pluginManager.getComponent("aNumber").component;
 const Radio = pluginManager.getComponent("radio").component;
 const RadioButton = pluginManager.getComponent("radioButton").component;
 const Textarea = pluginManager.getComponent("textarea").component;

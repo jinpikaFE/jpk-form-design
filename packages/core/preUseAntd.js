@@ -37,7 +37,7 @@ import {
 
 pluginManager.addComponent("input", Input);
 pluginManager.addComponent("textarea", Input.TextArea);
-pluginManager.addComponent("number", InputNumber);
+pluginManager.addComponent("aNumber", InputNumber);
 pluginManager.addComponent("select", Select);
 pluginManager.addComponent("checkbox", Checkbox.Group);
 pluginManager.addComponent("checkboxItem", Checkbox);
