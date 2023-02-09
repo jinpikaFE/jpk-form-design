@@ -200,32 +200,35 @@ export default {
       return options;
     },
     getRules() {
-      return [
-        ...this.record.rules,
-        {
-          validator: (rule, value, callback) => {
-            if (
-              value != undefined &&
-              this.record?.rules?.[1]?.validatorMax &&
-              value > this.record?.rules?.[1]?.validatorMax
-            ) {
-              callback(
-                `最大值不能超过${this.record?.rules?.[1]?.validatorMax}`
-              );
-            }
-            if (
-              value != undefined &&
-              this.record?.rules?.[1]?.validatorMin &&
-              value < this.record?.rules?.[1]?.validatorMin
-            ) {
-              callback(
-                `最小值不能低于${this.record?.rules?.[1]?.validatorMin}`
-              );
-            }
-            callback();
+      if (this.record.type === "number") {
+        return [
+          ...this.record.rules,
+          {
+            validator: (rule, value, callback) => {
+              if (
+                value != undefined &&
+                this.record?.rules?.[1]?.validatorMax &&
+                value > this.record?.rules?.[1]?.validatorMax
+              ) {
+                callback(
+                  `最大值不能超过${this.record?.rules?.[1]?.validatorMax}`
+                );
+              }
+              if (
+                value != undefined &&
+                this.record?.rules?.[1]?.validatorMin &&
+                value < this.record?.rules?.[1]?.validatorMin
+              ) {
+                callback(
+                  `最小值不能低于${this.record?.rules?.[1]?.validatorMin}`
+                );
+              }
+              callback();
+            },
           },
-        },
-      ];
+        ];
+      }
+      return this.record.rules;
     },
   },
   methods: {

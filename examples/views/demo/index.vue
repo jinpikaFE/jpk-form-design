@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <a-tabs default-active-key="1" :animated="false">
+    <a-tabs default-active-key="1" class="view-tab" :animated="false">
       <a-tab-pane key="1">
         <span slot="tab">
           <a-icon type="desktop" />
@@ -57,9 +57,11 @@ export default {
 
 <style lang="less" scoped>
 .container {
-  ::v-deep .ant-tabs-nav-scroll {
-    display: flex;
-    justify-content: center;
+  .view-tab {
+    ::v-deep >.ant-tabs-bar>.ant-tabs-nav-container>.ant-tabs-nav-wrap>.ant-tabs-nav-scroll {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 

@@ -14,11 +14,11 @@
 
     <a-row v-if="type === 'rules'" :gutter="8">
       <template v-if="isNumber">
-        <a-form-item label="最大值" class="no-border">
-          <InputNumber v-model="value[1].validatorMax" placeholder="最大值" />
-        </a-form-item>
         <a-form-item label="最小值" class="no-border">
           <InputNumber v-model="value[1].validatorMin" placeholder="最小值" />
+        </a-form-item>
+        <a-form-item label="最大值" class="no-border">
+          <InputNumber v-model="value[1].validatorMax" placeholder="最大值" />
         </a-form-item>
       </template>
       <span v-for="(val, index) in value" :key="index">
