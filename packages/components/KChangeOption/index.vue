@@ -13,7 +13,7 @@
     </a-row>
 
     <a-row v-if="type === 'rules'" :gutter="8">
-      <template v-if="value[1].type === 'number'">
+      <template v-if="isNumber">
         <a-form-item label="最大值" class="no-border">
           <InputNumber v-model="value[1].validatorMax" placeholder="最大值" />
         </a-form-item>
@@ -78,6 +78,12 @@ export default {
     type: {
       type: String,
       default: "option",
+    },
+  },
+  computed: {
+    /** 是否number输入框 */
+    isNumber() {
+      return this.value?.[1]?.type === "number";
     },
   },
   methods: {
