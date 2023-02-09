@@ -68,7 +68,13 @@ export default {
         if (!initValue.length) {
           this.record.columns.forEach((item) => {
             const itemData = {};
-            item.list.forEach((e) => e.model && (itemData[e.model] = null));
+            console.log(val, this.record);
+            item.list.forEach((e) => {
+              return (
+                e.model &&
+                (itemData[e.model] = e?.options?.defaultValue || null)
+              );
+            });
             itemData.checked = false;
             itemData.value = item.value;
             itemData.label = item.label;

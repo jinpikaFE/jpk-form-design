@@ -14,26 +14,26 @@
     <a-table
       class="batch-table"
       :pagination="false"
-      :rowKey="record => record.key"
+      :rowKey="(record) => record.key"
       :columns="columns"
       :dataSource="dynamicValidateForm.domains"
       bordered
       :scroll="{
         x: listLength * 190 + 80 + (!record.options.hideSequence ? 60 : 0),
-        y: record.options.scrollY
+        y: record.options.scrollY,
       }"
     >
       <template
-        v-for="item in record.list"
+        v-for="(item, i) in record.list"
         :slot="item.key"
-        slot-scope="text, record, index"
+        slot-scope="text, record"
       >
         <KFormModelItem
           :key="item.key + '1'"
           :record="item"
           :config="config"
           :parentDisabled="disabled"
-          :index="index"
+          :indexNum="i"
           :domains="dynamicValidateForm.domains"
           :dynamicData="dynamicData"
           v-model="record[item.model]"
@@ -75,7 +75,7 @@ export default {
 
   components: {
     KFormModelItem,
-    Button
+    Button,
   },
   watch: {
     value: {
@@ -84,19 +84,19 @@ export default {
         this.dynamicValidateForm.domains = val || [];
       },
       immediate: true,
-      deep: true
-    }
+      deep: true,
+    },
   },
   data() {
     return {
       dynamicValidateForm: {
-        domains: []
-      }
+        domains: [],
+      },
     };
   },
   computed: {
     listLength() {
-      return this.record.list.filter(item => !item.options.hidden).length;
+      return this.record.list.filter((item) => !item.options.hidden).length;
     },
     columns() {
       const columns = [];
@@ -108,19 +108,19 @@ export default {
           align: "center",
           customRender: (text, record, index) => {
             return index + 1;
-          }
+          },
         });
       }
 
       columns.push(
         ...this.record.list
-          .filter(item => !item.options.hidden)
+          .filter((item) => !item.options.hidden)
           .map((item, index) => {
             return {
               title: item.label,
               dataIndex: item.key,
               width: index === this.record.list.length - 1 ? "" : "190px",
-              scopedSlots: { customRender: item.key }
+              scopedSlots: { customRender: item.key },
             };
           })
       );
@@ -131,19 +131,19 @@ export default {
         fixed: "right",
         width: "80px",
         align: "center",
-        scopedSlots: { customRender: "dynamic-opr-button" }
+        scopedSlots: { customRender: "dynamic-opr-button" },
       });
 
       return columns;
     },
     disabled() {
       return this.record.options.disabled || this.parentDisabled;
-    }
+    },
   },
   methods: {
     validationSubform() {
       let verification;
-      this.$refs.dynamicValidateForm.validate(valid => {
+      this.$refs.dynamicValidateForm.validate((valid) => {
         verification = valid;
       });
       return verification;
@@ -160,25 +160,25 @@ export default {
     copyDomain(record) {
       this.dynamicValidateForm.domains.push({
         ...record,
-        key: Date.now()
+        key: Date.now(),
       });
       this.handleInput();
     },
     addDomain() {
       const data = {};
-      this.record.list.forEach(item => {
+      this.record.list.forEach((item) => {
         data[item.model] = item.options.defaultValue;
       });
 
       this.dynamicValidateForm.domains.push({
         ...data,
-        key: Date.now()
+        key: Date.now(),
       });
       this.handleInput();
     },
     handleInput() {
       this.$emit("change", this.dynamicValidateForm.domains);
-    }
-  }
+    },
+  },
 };
 </script>

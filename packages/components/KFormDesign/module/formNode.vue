@@ -13,7 +13,7 @@
     :class="{ active: record.key === selectItem.key }"
   >
     <div class="form-item-box">
-      <kFormItem :formConfig="config" :record="record" />
+      <kFormItem :formConfig="config" :record="record" :disabled="disabled" />
     </div>
     <div
       v-if="!hideModel"
@@ -47,23 +47,27 @@ export default {
   props: {
     record: {
       type: Object,
-      required: true
+      required: true,
     },
     selectItem: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     config: {
       type: Object,
-      required: true
+      required: true,
     },
     hideModel: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
-    kFormItem
-  }
+    kFormItem,
+  },
 };
 </script>

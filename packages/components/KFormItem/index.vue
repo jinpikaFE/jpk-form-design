@@ -207,7 +207,7 @@ export default {
             validator: (rule, value, callback) => {
               if (
                 value != undefined &&
-                value != "" &&
+                value !== "" &&
                 this.record?.rules?.[1]?.validatorMax &&
                 value > this.record?.rules?.[1]?.validatorMax
               ) {
@@ -217,7 +217,7 @@ export default {
               }
               if (
                 value != undefined &&
-                value != "" &&
+                value !== "" &&
                 this.record?.rules?.[1]?.validatorMin &&
                 value < this.record?.rules?.[1]?.validatorMin
               ) {

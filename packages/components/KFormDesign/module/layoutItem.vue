@@ -62,6 +62,7 @@
               <formNode
                 v-for="item in record.list"
                 :key="item.key"
+                :disabled="record.options.disabled"
                 class="drag-move"
                 :selectItem.sync="selectItem"
                 :record="item"
@@ -154,6 +155,7 @@
                 <formNode
                   v-for="item in column.list"
                   :key="item.key"
+                  :disabled="record.options.disabled"
                   class="drag-move"
                   :selectItem.sync="selectItem"
                   :record="item"
@@ -480,6 +482,7 @@
       <formNode
         :key="record.key"
         :selectItem.sync="selectItem"
+        :disabled="record.options.disabled"
         :record="record"
         :config="config"
         :hideModel="hideModel"

@@ -131,7 +131,7 @@ export default {
             validator: (rule, value, callback) => {
               if (
                 value != undefined &&
-                value != "" &&
+                value !== "" &&
                 this.record?.rules?.[1]?.validatorMax &&
                 value > this.record?.rules?.[1]?.validatorMax
               ) {
@@ -141,7 +141,7 @@ export default {
               }
               if (
                 value != undefined &&
-                value != "" &&
+                value !== "" &&
                 this.record?.rules?.[1]?.validatorMin &&
                 value < this.record?.rules?.[1]?.validatorMin
               ) {
@@ -160,8 +160,8 @@ export default {
   methods: {
     handleChange(e) {
       let value = e;
-      if (e.target) {
-        value = e.target.value;
+      if (e?.target) {
+        value = e?.target?.value;
       }
       this.$emit("input", value);
     },
