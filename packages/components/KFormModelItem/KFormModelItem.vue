@@ -13,8 +13,8 @@
   ></component>
   <a-form-model-item
     v-else
-    :prop="`domains.${record.model}`"
-    :rules="record.rules"
+    :prop="`domains.${indexNum}.${record.model}`"
+    :rules="getRules"
   >
     <component
       :is="componentItem"
@@ -40,11 +40,11 @@ export default {
   props: [
     "record",
     "domains",
-    "index",
+    "indexNum",
     "value",
     "parentDisabled",
     "dynamicData",
-    "config"
+    "config",
   ],
   computed: {
     /**
@@ -56,8 +56,8 @@ export default {
         record,
         ...this.componentOption,
         config: this.config,
-        disabled: this.disabled || record.options.disabled,
-        parentDisabled: this.disabled || record.options.disabled,
+        disabled: this.parentDisabled || record.options.disabled,
+        parentDisabled: this.parentDisabled || record.options.disabled,
         allowClear: record.options.clearable,
         mode: record.options.multiple ? "multiple" : "",
         value: this.value,
@@ -71,13 +71,13 @@ export default {
           ? record.options.options
           : this.dynamicData[record.options.dynamicKey]
           ? this.dynamicData[record.options.dynamicKey]
-          : []
+          : [],
       };
 
       if (this.record.type === "textarea") {
         componentProps.autoSize = {
           minRows: record.options.minRows,
-          maxRows: record.options.maxRows
+          maxRows: record.options.maxRows,
         };
       }
 
@@ -122,7 +122,40 @@ export default {
     },
     componentOption() {
       return _.omit(this.record.options, ["defaultValue", "disabled"]);
-    }
+    },
+    getRules() {
+      if (this.record.type === "number") {
+        return [
+          ...this.record.rules,
+          {
+            validator: (rule, value, callback) => {
+              if (
+                value != undefined &&
+                value != "" &&
+                this.record?.rules?.[1]?.validatorMax &&
+                value > this.record?.rules?.[1]?.validatorMax
+              ) {
+                callback(
+                  `最大值不能超过${this.record?.rules?.[1]?.validatorMax}`
+                );
+              }
+              if (
+                value != undefined &&
+                value != "" &&
+                this.record?.rules?.[1]?.validatorMin &&
+                value < this.record?.rules?.[1]?.validatorMin
+              ) {
+                callback(
+                  `最小值不能低于${this.record?.rules?.[1]?.validatorMin}`
+                );
+              }
+              callback();
+            },
+          },
+        ];
+      }
+      return this.record.rules;
+    },
   },
   methods: {
     handleChange(e) {
@@ -131,7 +164,7 @@ export default {
         value = e.target.value;
       }
       this.$emit("input", value);
-    }
-  }
+    },
+  },
 };
 </script>

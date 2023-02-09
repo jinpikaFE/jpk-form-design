@@ -207,6 +207,7 @@ export default {
             validator: (rule, value, callback) => {
               if (
                 value != undefined &&
+                value != "" &&
                 this.record?.rules?.[1]?.validatorMax &&
                 value > this.record?.rules?.[1]?.validatorMax
               ) {
@@ -216,6 +217,7 @@ export default {
               }
               if (
                 value != undefined &&
+                value != "" &&
                 this.record?.rules?.[1]?.validatorMin &&
                 value < this.record?.rules?.[1]?.validatorMin
               ) {
@@ -237,8 +239,11 @@ export default {
       return String(v) !== "false";
     },
     validationSubform() {
-      // 验证动态表格
-      if (this.record.type === "batch") {
+      // 验证动态表格 和选择输入列
+      if (
+        this.record.type === "batch" ||
+        this.record.type === "selectInputList"
+      ) {
         if (!this.$refs.inputItem) return true;
         return this.$refs.inputItem.validationSubform();
       }

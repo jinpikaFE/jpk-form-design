@@ -57,7 +57,6 @@ export default {
       this.visible = false;
     },
     handleImportJson() {
-      console.log("test");
       this.$emit("onOk", this.jsonFormat);
     },
   },

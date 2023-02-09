@@ -13,8 +13,9 @@
     :model="dynamicValidateForm"
   >
     <div v-for="(column, i) in record.columns" :key="i" class="list-col">
-      <a-form-model-item class="w-auto">
+      <a-form-model-item class="w-auto" :disabled="true">
         <CheckboxItem
+          :disabled="disabled"
           v-if="record.options.multiple"
           @change="onCheckboxChange($event, i)"
           :checked="dynamicValidateForm.domains[i].checked"
@@ -23,6 +24,7 @@
         </CheckboxItem>
         <RadioItem
           v-else
+          :disabled="disabled"
           @change="onRadioChange($event, i)"
           :checked="dynamicValidateForm.domains[i].checked"
           >{{ column.label }}</RadioItem
@@ -30,6 +32,7 @@
       </a-form-model-item>
       <KFormModelItem
         v-for="item in column.list"
+        :indexNum="i"
         :key="item.key + '1'"
         :record="item"
         :config="config"
@@ -55,7 +58,7 @@ export default {
   components: {
     KFormModelItem,
     CheckboxItem,
-    RadioItem
+    RadioItem,
   },
   watch: {
     value: {
@@ -63,9 +66,9 @@ export default {
       handler(val) {
         const initValue = val || [];
         if (!initValue.length) {
-          this.record.columns.forEach(item => {
+          this.record.columns.forEach((item) => {
             const itemData = {};
-            item.list.forEach(e => e.model && (itemData[e.model] = null));
+            item.list.forEach((e) => e.model && (itemData[e.model] = null));
             itemData.checked = false;
             itemData.value = item.value;
             itemData.label = item.label;
@@ -76,25 +79,25 @@ export default {
         this.dynamicValidateForm.domains = initValue;
       },
       immediate: true,
-      deep: true
-    }
+      deep: true,
+    },
   },
   data() {
     return {
       dynamicValidateForm: {
-        domains: []
-      }
+        domains: [],
+      },
     };
   },
   computed: {
     disabled() {
       return this.record.options.disabled || this.parentDisabled;
-    }
+    },
   },
   methods: {
     validationSubform() {
       let verification;
-      this.$refs.dynamicValidateForm.validate(valid => {
+      this.$refs.dynamicValidateForm.validate((valid) => {
         verification = valid;
       });
       return verification;
@@ -107,16 +110,18 @@ export default {
       this.handleInput();
     },
     onRadioChange(e, index) {
-      this.dynamicValidateForm.domains.forEach(item => (item.checked = false));
+      this.dynamicValidateForm.domains.forEach(
+        (item) => (item.checked = false)
+      );
       this.dynamicValidateForm.domains[index].checked = e.target.checked;
       this.handleInput();
     },
     handleInput() {
       this.$emit("change", this.dynamicValidateForm.domains);
-    }
+    },
   },
   mounted() {
     this.handleInput();
-  }
+  },
 };
 </script>
