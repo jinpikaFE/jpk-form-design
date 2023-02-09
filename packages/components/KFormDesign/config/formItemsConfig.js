@@ -20,7 +20,7 @@ export const defaultSchemaList = [
       addonAfter: "",
       showLabel: true,
       hidden: false, // 是否隐藏，false显示，true隐藏
-      disabled: false // 是否禁用，false不禁用，true禁用
+      disabled: false, // 是否禁用，false不禁用，true禁用
     },
     model: "", // 数据字段
     key: "",
@@ -29,9 +29,9 @@ export const defaultSchemaList = [
       //验证规则
       {
         required: false, // 必须填写
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "textarea", // 表单类型
@@ -47,7 +47,7 @@ export const defaultSchemaList = [
       showLabel: true,
       hidden: false, // 是否隐藏，false显示，true隐藏
       disabled: false,
-      placeholder: "请输入"
+      placeholder: "请输入",
     },
     model: "", // 数据字段
     key: "",
@@ -55,9 +55,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "number", // 表单类型
@@ -73,7 +73,7 @@ export const defaultSchemaList = [
       showLabel: true,
       hidden: false, // 是否隐藏，false显示，true隐藏
       disabled: false, //是否禁用
-      placeholder: "请输入"
+      placeholder: "请输入",
     },
     model: "", // 数据字段
     key: "",
@@ -81,9 +81,10 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+      { type: "number", validatorMax: null, validatorMin: null },
+    ],
   },
   {
     type: "select", // 表单类型
@@ -104,14 +105,14 @@ export const defaultSchemaList = [
         // 下拉选择项配置
         {
           value: "1",
-          label: "下拉框1"
+          label: "下拉框1",
         },
         {
           value: "2",
-          label: "下拉框2"
-        }
+          label: "下拉框2",
+        },
       ],
-      showSearch: false // 是否显示搜索框，搜索选择的项的值，而不是文字
+      showSearch: false, // 是否显示搜索框，搜索选择的项的值，而不是文字
     },
     model: "",
     key: "",
@@ -119,9 +120,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "checkbox",
@@ -137,17 +138,17 @@ export const defaultSchemaList = [
       options: [
         {
           value: "1",
-          label: "选项1"
+          label: "选项1",
         },
         {
           value: "2",
-          label: "选项2"
+          label: "选项2",
         },
         {
           value: "3",
-          label: "选项3"
-        }
-      ]
+          label: "选项3",
+        },
+      ],
     },
     model: "",
     key: "",
@@ -155,9 +156,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "radio", // 表单类型
@@ -173,17 +174,17 @@ export const defaultSchemaList = [
       options: [
         {
           value: "1",
-          label: "选项1"
+          label: "选项1",
         },
         {
           value: "2",
-          label: "选项2"
+          label: "选项2",
         },
         {
           value: "3",
-          label: "选项3"
-        }
-      ]
+          label: "选项3",
+        },
+      ],
     },
     model: "",
     key: "",
@@ -191,9 +192,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "date", // 表单类型
@@ -211,7 +212,7 @@ export const defaultSchemaList = [
       clearable: false, // 是否显示清除按钮
       placeholder: "请选择",
       rangePlaceholder: ["开始时间", "结束时间"],
-      format: "YYYY-MM-DD" // 展示格式  （请按照这个规则写 YYYY-MM-DD HH:mm:ss，区分大小写）
+      format: "YYYY-MM-DD", // 展示格式  （请按照这个规则写 YYYY-MM-DD HH:mm:ss，区分大小写）
     },
     model: "",
     key: "",
@@ -219,9 +220,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "time", // 表单类型
@@ -235,7 +236,7 @@ export const defaultSchemaList = [
       hidden: false, // 是否隐藏，false显示，true隐藏
       clearable: false, // 是否显示清除按钮
       placeholder: "请选择",
-      format: "HH:mm:ss" // 展示格式
+      format: "HH:mm:ss", // 展示格式
     },
     model: "",
     key: "",
@@ -243,9 +244,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "rate", // 表单类型
@@ -257,7 +258,7 @@ export const defaultSchemaList = [
       disabled: false, // 是否禁用
       showLabel: true,
       hidden: false, // 是否隐藏，false显示，true隐藏
-      allowHalf: false // 是否允许半选
+      allowHalf: false, // 是否允许半选
     },
     model: "",
     key: "",
@@ -265,9 +266,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "slider", // 表单类型
@@ -282,7 +283,7 @@ export const defaultSchemaList = [
       min: 0, // 最小值
       max: 100, // 最大值
       step: 1, // 步长，取值必须大于 0，并且可被 (max - min) 整除
-      showInput: false // 是否显示输入框，range为true时，请勿开启
+      showInput: false, // 是否显示输入框，range为true时，请勿开启
       // range: false // 双滑块模式
     },
     model: "",
@@ -291,9 +292,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "uploadFile", // 表单类型
@@ -314,7 +315,7 @@ export const defaultSchemaList = [
       fileName: "file",
       headers: {},
       action: "http://cdn.kcz66.com/uploadFile.txt",
-      placeholder: "上传"
+      placeholder: "上传",
     },
     model: "",
     key: "",
@@ -322,9 +323,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "uploadImg",
@@ -343,7 +344,7 @@ export const defaultSchemaList = [
       fileName: "image",
       headers: {},
       action: "http://cdn.kcz66.com/upload-img.txt",
-      listType: "picture-card"
+      listType: "picture-card",
     },
     model: "",
     key: "",
@@ -351,9 +352,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "treeSelect", // 表单类型
@@ -378,9 +379,9 @@ export const defaultSchemaList = [
           children: [
             {
               value: "11",
-              label: "选项11"
-            }
-          ]
+              label: "选项11",
+            },
+          ],
         },
         {
           value: "2",
@@ -388,11 +389,11 @@ export const defaultSchemaList = [
           children: [
             {
               value: "22",
-              label: "选项22"
-            }
-          ]
-        }
-      ]
+              label: "选项22",
+            },
+          ],
+        },
+      ],
     },
     model: "",
     key: "",
@@ -400,9 +401,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "cascader", // 表单类型
@@ -425,9 +426,9 @@ export const defaultSchemaList = [
           children: [
             {
               value: "11",
-              label: "选项11"
-            }
-          ]
+              label: "选项11",
+            },
+          ],
         },
         {
           value: "2",
@@ -435,11 +436,11 @@ export const defaultSchemaList = [
           children: [
             {
               value: "22",
-              label: "选项22"
-            }
-          ]
-        }
-      ]
+              label: "选项22",
+            },
+          ],
+        },
+      ],
     },
     model: "",
     key: "",
@@ -447,9 +448,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "batch",
@@ -462,11 +463,11 @@ export const defaultSchemaList = [
       hidden: false, // 是否隐藏，false显示，true隐藏
       showLabel: false,
       hideSequence: false,
-      width: "100%"
+      width: "100%",
     },
     model: "",
     key: "",
-    help: ""
+    help: "",
   },
   {
     type: "selectInputList",
@@ -476,24 +477,24 @@ export const defaultSchemaList = [
       {
         value: "1",
         label: "选项1",
-        list: []
+        list: [],
       },
       {
         value: "2",
         label: "选项2",
-        list: []
-      }
+        list: [],
+      },
     ],
     options: {
       disabled: false,
       multiple: true, // 是否允许多选
       hidden: false, // 是否隐藏，false显示，true隐藏
       showLabel: true,
-      width: "100%"
+      width: "100%",
     },
     model: "",
     key: "",
-    help: ""
+    help: "",
   },
   {
     type: "editor",
@@ -508,7 +509,7 @@ export const defaultSchemaList = [
       hidden: false, // 是否隐藏，false显示，true隐藏
       disabled: false,
       showLabel: false,
-      width: "100%"
+      width: "100%",
     },
     model: "",
     key: "",
@@ -516,9 +517,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "switch", // 表单类型
@@ -528,7 +529,7 @@ export const defaultSchemaList = [
       defaultValue: false, // 默认值 Boolean 类型
       showLabel: true,
       hidden: false, // 是否隐藏，false显示，true隐藏
-      disabled: false // 是否禁用
+      disabled: false, // 是否禁用
     },
     model: "",
     key: "",
@@ -536,9 +537,9 @@ export const defaultSchemaList = [
     rules: [
       {
         required: false,
-        message: "必填项"
-      }
-    ]
+        message: "必填项",
+      },
+    ],
   },
   {
     type: "button", // 表单类型
@@ -550,9 +551,9 @@ export const defaultSchemaList = [
       dynamicFun: "",
       showLabel: false,
       hidden: false, // 是否隐藏，false显示，true隐藏
-      disabled: false // 是否禁用，false不禁用，true禁用
+      disabled: false, // 是否禁用，false不禁用，true禁用
     },
-    key: ""
+    key: "",
   },
   {
     type: "alert",
@@ -565,9 +566,9 @@ export const defaultSchemaList = [
       banner: false,
       showLabel: false,
       hidden: false, // 是否隐藏，false显示，true隐藏
-      closable: false
+      closable: false,
     },
-    key: ""
+    key: "",
   },
   {
     type: "text",
@@ -580,9 +581,9 @@ export const defaultSchemaList = [
       noFormItem: true,
       color: "rgba(0, 0, 0, 0.9)",
       fontFamily: "",
-      fontSize: "10.5pt"
+      fontSize: "10.5pt",
     },
-    key: ""
+    key: "",
   },
   {
     type: "html",
@@ -591,9 +592,9 @@ export const defaultSchemaList = [
     options: {
       noFormItem: true,
       hidden: false, // 是否隐藏，false显示，true隐藏
-      defaultValue: "<strong>HTML</strong>"
+      defaultValue: "<strong>HTML</strong>",
     },
-    key: ""
+    key: "",
   },
   {
     type: "divider",
@@ -601,10 +602,10 @@ export const defaultSchemaList = [
     icon: "icon-fengexian",
     options: {
       orientation: "left",
-      noFormItem: true
+      noFormItem: true,
     },
     key: "",
-    model: ""
+    model: "",
   },
   {
     type: "card",
@@ -612,10 +613,10 @@ export const defaultSchemaList = [
     icon: "icon-qiapian",
     list: [],
     options: {
-      noFormItem: true
+      noFormItem: true,
     },
     key: "",
-    model: ""
+    model: "",
   },
   {
     type: "tabs",
@@ -627,22 +628,22 @@ export const defaultSchemaList = [
       tabPosition: "top",
       size: "default",
       noFormItem: true,
-      animated: true
+      animated: true,
     },
     columns: [
       {
         value: "1",
         label: "选项1",
-        list: []
+        list: [],
       },
       {
         value: "2",
         label: "选项2",
-        list: []
-      }
+        list: [],
+      },
     ],
     key: "",
-    model: ""
+    model: "",
   },
   {
     type: "grid",
@@ -651,19 +652,19 @@ export const defaultSchemaList = [
     columns: [
       {
         span: 12,
-        list: []
+        list: [],
       },
       {
         span: 12,
-        list: []
-      }
+        list: [],
+      },
     ],
     options: {
       noFormItem: true,
-      gutter: 0
+      gutter: 0,
     },
     key: "",
-    model: ""
+    model: "",
   },
   {
     type: "table",
@@ -675,29 +676,29 @@ export const defaultSchemaList = [
           {
             colspan: 1,
             rowspan: 1,
-            list: []
+            list: [],
           },
           {
             colspan: 1,
             rowspan: 1,
-            list: []
-          }
-        ]
+            list: [],
+          },
+        ],
       },
       {
         tds: [
           {
             colspan: 1,
             rowspan: 1,
-            list: []
+            list: [],
           },
           {
             colspan: 1,
             rowspan: 1,
-            list: []
-          }
-        ]
-      }
+            list: [],
+          },
+        ],
+      },
     ],
     options: {
       width: "100%",
@@ -705,9 +706,9 @@ export const defaultSchemaList = [
       bright: false,
       small: true,
       noFormItem: true,
-      customStyle: ""
+      customStyle: "",
     },
     key: "",
-    model: ""
-  }
+    model: "",
+  },
 ];

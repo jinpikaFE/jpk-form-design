@@ -13,16 +13,16 @@
     </a-row>
 
     <a-row v-if="type === 'rules'" :gutter="8">
-      <a-form-item label="最大值" class="no-border">
-        <InputNumber v-model="max" placeholder="最大值" />
-        <Input placeholder="提示信息" />
-      </a-form-item>
-      <a-form-item label="最小值" class="no-border">
-        <InputNumber placeholder="最小值" />
-        <Input placeholder="提示信息" />
-      </a-form-item>
+      <template v-if="value[1].type === 'number'">
+        <a-form-item label="最大值" class="no-border">
+          <InputNumber v-model="value[1].validatorMax" placeholder="最大值" />
+        </a-form-item>
+        <a-form-item label="最小值" class="no-border">
+          <InputNumber v-model="value[1].validatorMin" placeholder="最小值" />
+        </a-form-item>
+      </template>
       <span v-for="(val, index) in value" :key="index">
-        <div class="option-change-box" v-if="index !== 0">
+        <div class="option-change-box" v-if="index > 1">
           <a-col :span="18"
             ><Input v-model="val.message" placeholder="提示信息"
           /></a-col>
@@ -80,46 +80,6 @@ export default {
       default: "option",
     },
   },
-  data() {
-    return {
-      max: null,
-      maxMsg: "",
-      min: null,
-      minMsg: "",
-    };
-  },
-  // watch: {
-  //   max: {
-  //     // value 需要深度监听及默认先执行handler函数
-  //     handler(val) {
-  //       console.log(val);
-  //       const index = this.value.findIndex((item) => item?.validator);
-  //       if (index !== -1) {
-  //         this.value[index].validator = (rule, value, callback) => {
-  //           if (val && value < val) {
-  //             callback(`最大值不能超过${val}`);
-  //           }
-  //           callback();
-  //         };
-  //       } else {
-  //         this.value = [
-  //           ...this.value,
-  //           {
-  //             validator: (rule, value, callback) => {
-  //               if (val && value < val) {
-  //                 callback(`最大值不能超过${val}`);
-  //               }
-  //               callback();
-  //             },
-  //           },
-  //         ];
-  //       }
-  //       console.log(this.value,JSON.stringify(this.value));
-  //     },
-  //     immediate: true,
-  //     deep: true,
-  //   },
-  // },
   methods: {
     handleAdd() {
       // 添加

@@ -61,8 +61,8 @@
         {
           initialValue: record.options.defaultValue, // 默认值
           valuePropName: record.type === 'switch' ? 'checked' : 'value',
-          rules: record.rules // 验证规则
-        }
+          rules: getRules, // 验证规则
+        },
       ]"
     ></component>
   </a-form-item>
@@ -82,25 +82,25 @@ export default {
     // 表单数组
     record: {
       type: Object,
-      required: true
+      required: true,
     },
     // form-item 宽度配置
     formConfig: {
       type: Object,
-      required: true
+      required: true,
     },
     config: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     dynamicData: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     /**
@@ -127,13 +127,13 @@ export default {
           ? record.options.options
           : this.dynamicData[record.options.dynamicKey]
           ? this.dynamicData[record.options.dynamicKey]
-          : []
+          : [],
       };
 
       if (this.record.type === "textarea") {
         componentProps.autoSize = {
           minRows: record.options.minRows,
-          maxRows: record.options.maxRows
+          maxRows: record.options.maxRows,
         };
       }
 
@@ -198,7 +198,35 @@ export default {
       // 移除相应字段
       const options = _.omit(this.record.options, ["defaultValue", "disabled"]);
       return options;
-    }
+    },
+    getRules() {
+      return [
+        ...this.record.rules,
+        {
+          validator: (rule, value, callback) => {
+            if (
+              value != undefined &&
+              this.record?.rules?.[1]?.validatorMax &&
+              value > this.record?.rules?.[1]?.validatorMax
+            ) {
+              callback(
+                `最大值不能超过${this.record?.rules?.[1]?.validatorMax}`
+              );
+            }
+            if (
+              value != undefined &&
+              this.record?.rules?.[1]?.validatorMin &&
+              value < this.record?.rules?.[1]?.validatorMin
+            ) {
+              callback(
+                `最小值不能低于${this.record?.rules?.[1]?.validatorMin}`
+              );
+            }
+            callback();
+          },
+        },
+      ];
+    },
   },
   methods: {
     // 判断isShowLabel === false兼容低版本处理
@@ -227,11 +255,11 @@ export default {
       this.$nextTick(() => {
         lazyLoadTick.countLoaded(this.record.type);
       });
-    }
+    },
   },
   created() {
     // 记录待加载组件
     lazyLoadTick.countlazyLoad(this.record.type);
-  }
+  },
 };
 </script>
