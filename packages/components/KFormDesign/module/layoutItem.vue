@@ -10,8 +10,8 @@
         'editor',
         'batch',
         'divider',
-        'html'
-      ].includes(record.type)
+        'html',
+      ].includes(record.type),
     }"
   >
     <!-- 动态表格设计模块 start -->
@@ -52,7 +52,7 @@
               group: insertAllowed ? 'form-draggable' : '',
               ghostClass: 'moving',
               animation: 180,
-              handle: '.drag-move'
+              handle: '.drag-move',
             }"
             v-model="record.list"
             @start="$emit('dragStart', $event, record.list)"
@@ -91,6 +91,11 @@
         >
           <a-icon type="delete" />
         </div>
+        <div
+          v-if="!hideModel"
+          class="show-key-box"
+          v-text="record.label + (record.model ? '/' + record.model : '')"
+        />
       </div>
     </template>
     <!-- 动态表格设计模块 end -->
@@ -145,7 +150,7 @@
                 group: insertAllowed ? 'form-draggable' : '',
                 ghostClass: 'moving',
                 animation: 180,
-                handle: '.drag-move'
+                handle: '.drag-move',
               }"
               v-model="column.list"
               @start="$emit('dragStart', $event, column.list)"
@@ -185,6 +190,11 @@
         >
           <a-icon type="delete" />
         </div>
+        <div
+          v-if="!hideModel"
+          class="show-key-box"
+          v-text="record.label + (record.model ? '/' + record.model : '')"
+        />
       </div>
     </template>
     <!-- 选择输入列 end -->
@@ -217,7 +227,7 @@
                   group: 'form-draggable',
                   ghostClass: 'moving',
                   animation: 180,
-                  handle: '.drag-move'
+                  handle: '.drag-move',
                 }"
                 v-model="tabItem.list"
                 @start="$emit('dragStart', $event, tabItem.list)"
@@ -284,7 +294,7 @@
                 group: 'form-draggable',
                 ghostClass: 'moving',
                 animation: 180,
-                handle: '.drag-move'
+                handle: '.drag-move',
               }"
               v-model="colItem.list"
               @start="$emit('dragStart', $event, colItem.list)"
@@ -345,7 +355,7 @@
                 group: 'form-draggable',
                 ghostClass: 'moving',
                 animation: 180,
-                handle: '.drag-move'
+                handle: '.drag-move',
               }"
               v-model="record.list"
               @start="$emit('dragStart', $event, record.list)"
@@ -402,7 +412,7 @@
           :class="{
             bright: record.options.bright,
             small: record.options.small,
-            bordered: record.options.bordered
+            bordered: record.options.bordered,
           }"
           :style="
             'width:' + record.options.width + ';' + record.options.customStyle
@@ -427,7 +437,7 @@
                   group: 'form-draggable',
                   ghostClass: 'moving',
                   animation: 180,
-                  handle: '.drag-move'
+                  handle: '.drag-move',
                 }"
                 v-model="tdItem.list"
                 @start="$emit('dragStart', $event, tdItem.list)"
@@ -510,39 +520,39 @@ export default {
   props: {
     record: {
       type: Object,
-      required: true
+      required: true,
     },
     selectItem: {
       type: Object,
-      required: true
+      required: true,
     },
     config: {
       type: Object,
-      required: true
+      required: true,
     },
     startType: {
       type: String,
-      required: true
+      required: true,
     },
     insertAllowedType: {
       type: Array,
-      required: true
+      required: true,
     },
     hideModel: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     insertAllowed() {
       return this.insertAllowedType.includes(this.startType);
-    }
+    },
   },
   components: {
     formNode,
     draggable,
     CheckboxItem,
-    RadioItem
+    RadioItem,
   },
   methods: {
     handleShowRightMenu(e, record, trIndex, tdIndex) {
@@ -553,7 +563,7 @@ export default {
     },
     handleColAdd(e, list) {
       this.$emit("handleColAdd", e, list);
-    }
-  }
+    },
+  },
 };
 </script>

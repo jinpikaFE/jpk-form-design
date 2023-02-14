@@ -414,11 +414,17 @@
             v-model="options.range"
             label="范围选择"
           />
-          <kCheckbox
-            v-if="isDefined(options.showTime)"
-            v-model="options.showTime"
-            label="时间选择器"
-          />
+          <a-tooltip>
+            <template slot="title">
+              勾选该项请修改时间格式为 YYYY-MM-DD HH:mm:ss 否则修改为 YYYY-MM-DD
+            </template>
+            <kCheckbox
+              v-if="isDefined(options.showTime)"
+              v-model="options.showTime"
+              label="时间选择器"
+            />
+          </a-tooltip>
+
           <kCheckbox
             v-if="isDefined(options.allowHalf)"
             v-model="options.allowHalf"
