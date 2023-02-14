@@ -516,9 +516,20 @@
         <a-form-item label="后缀" v-if="isDefined(options.addonAfter)">
           <Input v-model="options.addonAfter" placeholder="请输入" />
         </a-form-item>
+
+        <!-- 逻辑设置 -->
+        <a-form-item label="逻辑设置">
+          <Space>
+            <Button @click="$refs.topicAssModal.visible = true"
+              >题目关联
+            </Button>
+            <Button>计算公式</Button>
+          </Space>
+        </a-form-item>
       </a-form>
     </div>
-    <SetDataModal ref="setDataModal" @onOk="handelJsonOk" />
+    <SetDataModal ref="setDataModal" @onOk="handleJsonOk" />
+    <TopicAssModal ref="topicAssModal" @onOk="handleTopicAss" />
   </div>
 </template>
 
@@ -532,6 +543,7 @@ import KChangeOption from "../../KChangeOption/index.vue";
 import kCheckbox from "../../KCheckbox/index.vue";
 import { pluginManager } from "../../../utils/index";
 import SetDataModal from "./setDataModal.vue";
+import TopicAssModal from "./topicAssModal.vue";
 import { message } from "ant-design-vue";
 const Input = pluginManager.getComponent("input").component;
 const InputNumber = pluginManager.getComponent("aNumber").component;
@@ -545,6 +557,7 @@ const Select = pluginManager.getComponent("select").component;
 const ColorPicker = pluginManager.getComponent("colorPicker").component;
 const ASwitch = pluginManager.getComponent("switch").component;
 const Button = pluginManager.getComponent("aButton").component;
+const Space = pluginManager.getComponent("aSpace").component;
 
 export default {
   name: "formItemProperties",
@@ -563,7 +576,9 @@ export default {
     Textarea,
     Select,
     SetDataModal,
+    TopicAssModal,
     Button,
+    Space
   },
   data() {
     return {
@@ -675,11 +690,16 @@ export default {
       );
       this.$refs.setDataModal.visible = true;
     },
-    handelJsonOk(val) {
+    handleJsonOk(val) {
       this.selectItem.options.options = JSON.parse(val);
       this.$refs.setDataModal.visible = false;
       message.success("修改成功");
     },
+    /** 题目关联 */
+    handleTopicAss(val) {
+      this.$refs.topicAssModal.visible = false;
+      console.log(val);
+    }
   },
 };
 </script>

@@ -32,7 +32,8 @@ import {
   Icon,
   Tooltip,
   FormModel,
-  Collapse
+  Collapse,
+  Space,
 } from "ant-design-vue";
 
 pluginManager.addComponent("input", Input);
@@ -57,6 +58,7 @@ pluginManager.addComponent("rangePicker", DatePicker.RangePicker);
 pluginManager.addComponent("monthPicker", DatePicker.MonthPicker);
 pluginManager.addComponent("upload", Upload);
 pluginManager.addComponent("uploadDragger", Upload.Dragger);
+pluginManager.addComponent("aSpace", Space);
 
 Vue.use(ConfigProvider);
 Vue.use(Tooltip);
@@ -72,3 +74,4 @@ Vue.use(Modal);
 Vue.use(Table);
 Vue.use(Tabs);
 Vue.use(Icon);
+Vue.use(Space);

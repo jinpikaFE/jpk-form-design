@@ -70,6 +70,7 @@ pluginManager.addComponent("alert", () => import("ant-design-vue/lib/alert"));
 pluginManager.addComponent("aButton", () =>
   import("ant-design-vue/lib/button")
 );
+pluginManager.addComponent("aSpace", () => import("ant-design-vue/lib/space"));
 
 pluginManager.addComponent("button", () =>
   import("../components/KButton/index")
