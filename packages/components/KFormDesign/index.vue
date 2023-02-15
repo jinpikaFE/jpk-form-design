@@ -243,6 +243,11 @@ export default {
       },
     };
   },
+  provide() {
+    return {
+      globalData: this.data,
+    };
+  },
   components: {
     kHeader,
     // kFooter,

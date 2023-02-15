@@ -104,11 +104,11 @@ export const defaultSchemaList = [
       options: [
         // 下拉选择项配置
         {
-          value: "1",
+          value: "下拉框1",
           label: "下拉框1",
         },
         {
-          value: "2",
+          value: "下拉框2",
           label: "下拉框2",
         },
       ],
@@ -137,15 +137,15 @@ export const defaultSchemaList = [
       dynamic: false,
       options: [
         {
-          value: "1",
+          value: "选项1",
           label: "选项1",
         },
         {
-          value: "2",
+          value: "选项2",
           label: "选项2",
         },
         {
-          value: "3",
+          value: "选项3",
           label: "选项3",
         },
       ],
@@ -173,15 +173,15 @@ export const defaultSchemaList = [
       dynamic: false,
       options: [
         {
-          value: "1",
+          value: "选项1",
           label: "选项1",
         },
         {
-          value: "2",
+          value: "选项2",
           label: "选项2",
         },
         {
-          value: "3",
+          value: "选项3",
           label: "选项3",
         },
       ],
@@ -374,21 +374,21 @@ export const defaultSchemaList = [
       dynamic: false,
       options: [
         {
-          value: "1",
+          value: "选项1",
           label: "选项1",
           children: [
             {
-              value: "11",
+              value: "选项11",
               label: "选项11",
             },
           ],
         },
         {
-          value: "2",
+          value: "选项2",
           label: "选项2",
           children: [
             {
-              value: "22",
+              value: "选项22",
               label: "选项22",
             },
           ],
@@ -421,21 +421,21 @@ export const defaultSchemaList = [
       dynamic: false,
       options: [
         {
-          value: "1",
+          value: "选项1",
           label: "选项1",
           children: [
             {
-              value: "11",
+              value: "选项11",
               label: "选项11",
             },
           ],
         },
         {
-          value: "2",
+          value: "选项2",
           label: "选项2",
           children: [
             {
-              value: "22",
+              value: "选项22",
               label: "选项22",
             },
           ],
@@ -475,12 +475,12 @@ export const defaultSchemaList = [
     icon: "icon-biaoge",
     columns: [
       {
-        value: "1",
+        value: "选项11",
         label: "选项1",
         list: [],
       },
       {
-        value: "2",
+        value: "选项2",
         label: "选项2",
         list: [],
       },
@@ -632,12 +632,12 @@ export const defaultSchemaList = [
     },
     columns: [
       {
-        value: "1",
+        value: "选项1",
         label: "选项1",
         list: [],
       },
       {
-        value: "2",
+        value: "选项2",
         label: "选项2",
         list: [],
       },

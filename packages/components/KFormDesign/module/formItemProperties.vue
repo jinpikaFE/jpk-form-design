@@ -529,7 +529,11 @@
       </a-form>
     </div>
     <SetDataModal ref="setDataModal" @onOk="handleJsonOk" />
-    <TopicAssModal ref="topicAssModal" @onOk="handleTopicAss" />
+    <TopicAssModal
+      ref="topicAssModal"
+      @onOk="handleTopicAss"
+      :selectItem="selectItem"
+    />
   </div>
 </template>
 
@@ -578,8 +582,9 @@ export default {
     SetDataModal,
     TopicAssModal,
     Button,
-    Space
+    Space,
   },
+  inject: ["globalData"],
   data() {
     return {
       familyOptions: [
@@ -697,9 +702,10 @@ export default {
     },
     /** 题目关联 */
     handleTopicAss(val) {
+      console.log(this.globalData);
       this.$refs.topicAssModal.visible = false;
       console.log(val);
-    }
+    },
   },
 };
 </script>
