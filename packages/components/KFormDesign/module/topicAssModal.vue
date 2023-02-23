@@ -40,16 +40,17 @@
           :label="`关联问题 ${index}`"
           :required="true"
         >
-          <Input
+          <Select
+            :options="otherSelects"
             v-decorator="[
-              `names[${k}].test`,
+              `names[${k}].bind_question`,
               {
                 validateTrigger: ['change', 'blur'],
                 rules: [
                   {
                     required: true,
                     whitespace: true,
-                    message: '请输入',
+                    message: '请选择',
                   },
                 ],
               },
@@ -64,9 +65,18 @@
             @click="() => remove(k)"
           />
         </a-form-item>
-        <a-form-item>
+        <a-form-item
+          :wrapperCol="{
+            xs: 24,
+            sm: 24,
+            md: { span: 15, offset: 4 },
+            lg: { span: 15, offset: 4 },
+            xl: { span: 15, offset: 4 },
+            xxl: { span: 15, offset: 4 },
+          }"
+        >
           <Button type="dashed" style="width: 60%" @click="add">
-            <a-icon type="plus" /> Add field
+            <a-icon type="plus" /> 添加关联
           </Button>
         </a-form-item>
       </a-form>
@@ -76,14 +86,14 @@
 <script>
 let id = 0;
 import { pluginManager } from "../../../utils/index";
-const Input = pluginManager.getComponent("input").component;
+const Select = pluginManager.getComponent("select").component;
 const Button = pluginManager.getComponent("aButton").component;
 
 export default {
   name: "topicAssModal",
   components: {
     Button,
-    Input,
+    Select,
   },
   data() {
     return {
@@ -97,10 +107,20 @@ export default {
       required: true,
     },
   },
+  inject: ["globalData"],
   computed: {
     editor() {
       // get current editor object
       return this.$refs.myEditor.editor;
+    },
+    otherSelects() {
+      return this.globalData?.list
+        ?.filter((item) => item?.key !== this.selectItem?.key)
+        ?.map((item) => ({
+          label: `${item?.label}-${item?.key}`,
+          value: item?.key,
+          type: item?.type,
+        }));
     },
   },
   beforeCreate() {
